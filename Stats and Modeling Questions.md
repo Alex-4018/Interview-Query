@@ -72,13 +72,19 @@ If our model has high bias, we'll observe fairly quick convergence to a high err
 
 If our model has high variance, we'll see a gap between the training and validation error. This is because the model is performing well for the training data, since it has been overfit to that subset, and performs poorly for the validation data since it was not able to generalize the proper relationships. In this case, feeding more data during training can help improve the model's performance.
 
+### 5. What are MLE and MAP? What is the difference between the two?
 
+Maximum Likelihood Estimation (MLE) and Maximum A Posteriori (MAP), are both a method for estimating some variable in the setting of probability distributions or graphical models. They are similar, as they compute a single estimate, instead of a full distribution.
 
+MLE gives you the value which maximises the Likelihood P(D|θ). And MAP gives you the value which maximises the posterior probability P(θ|D). As both methods give you a single fixed value, they’re considered as point estimators.
 
+Both Maximum Likelihood Estimation (MLE) and Maximum A Posterior (MAP) are used to estimate parameters for a distribution. MLE is also widely used to estimate the parameters for a Machine Learning model, including Naïve Bayes and Logistic regression. It is so common and popular that sometimes people use MLE even without knowing much of it. For example, when fitting a Normal distribution to the dataset, people can immediately calculate sample mean and variance, and take them as the parameters of the distribution. 
 
+Using the formula, first we need to derive the log likelihood function, then maximize it by making a derivative equal to 0 with regard of Θ or by using various optimization algorithms such as Gradient Descent. Because of duality, maximize a log likelihood function equals to minimize a negative log likelihood. In Machine Learning, minimizing negative log likelihood is preferred. For example, it is used as loss function, cross entropy, in the Logistic Regression.
 
+Based on the formula above, we can conclude that MLE is a special case of MAP, when prior follows a uniform distribution. This is the connection between MAP and MLE.
 
-
+[link][https://towardsdatascience.com/mle-vs-map-a989f423ae5c]
 
 
 
