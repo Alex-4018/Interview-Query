@@ -176,8 +176,70 @@ def missingNumber(nums):
         else: 
             return num
 
+#12. Greatest Common Denominator
+def gcd(list1):
+    a=min(list1)
+    for i in range(a,0,-1):
+        if all(num%i==0 for num in list1):
+            return(i)
 
-
+#13. Interquartile Distance
+def interq(array):
+    Q1 = np.percentile(array, 25, interpolation = 'midpoint') 
+    Q3 = np.percentile(array, 75, interpolation = 'midpoint') 
+    IQR = Q3 - Q1 
+    print(IQR)
+#########################
+import math
+def interq(array):
+    l=len(array)+1
+    a=l*1/4-1
+    b=l*3/4-1
+    if a is not int:
+        Q1 = (np.sort(array)[math.ceil(a)]+np.sort(array)[math.floor(a)])/2
+        Q3 = (np.sort(array)[math.ceil(b)]+np.sort(array)[math.floor(b)])/2
+    else:
+        Q1 = np.sort(array)[a]
+        Q3 = np.sort(array)[b]
+    
+    IQR = Q3 - Q1 
+    print(IQR)
+    
+#14. Equivalent Index  
+def findIndex(nums):
+    l= len(nums)
+    for i in range(0,l):
+        sum_l=sum(nums[0:i])
+        sum_r=sum(nums[i+1:])
+        if sum_l==sum_r:
+            return i
+    return -1    
+    
+#15. Bernoulli Sample  
+from scipy.stats import bernoulli
+def sample_from_normal(p, n=1000):
+    total = 0
+    for _ in range(n):
+        total += bernoulli.rvs(p)
+    return total
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
