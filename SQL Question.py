@@ -38,5 +38,52 @@ WHERE id >= CEIL(RAND() * ( SELECT MAX(id ) FROM big_table ))
 ORDER BY id ASC 
 LIMIT 1
 
+#3. Get the total three day rolling average for deposits by day
+WITH bank AS 
+(select DATE(created_at) AS dt, sum(transaction_value) as total 
+from bank_transactions 
+WHERE transaction_value >0 
+group by DATE(created_at) )
+
+select dt, avg(total) over(order by dt asc rows between 2 preceding and current row) as rolling_three_day 
+from bank;
+
+#4. Cumulative Distribution
+with tmp as 
+(select u.id, count(c.user_id) as num_comments 
+ from users u left join comments c on u.id = c.user_id 
+ group by 1),
+tmp2 as 
+(select num_comments, count(*) as freq 
+ from tmp where num_comments > 0 
+ group by 1 
+ order by 1)
+
+select t.num_comments, t.freq, sum(t2.freq) as cum_freq from tmp2 t left join tmp2 t2 on t.num_comments >= t2.num_comments group by 1
+--select num_comments, freq, sum(freq) over (order by num_comments) as cum_freq from tmp2 --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
