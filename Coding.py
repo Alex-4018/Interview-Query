@@ -423,16 +423,100 @@ def regression(A):
     print('β = ', int(round(model.coef_[0])))
     print('ŷ = ', int(round(model.coef_[0])),'X + ',int(round(model.intercept_)))
 
+#26. Build Route
+def buildRoute(input_cities):
+    cities=[]
+    tickets=[]
+    begin=[]  
+    for i in range(len(input_cities)):
+        cities.append(input_cities[i][0])
+        cities.append(input_cities[i][1])
+    cities.sort()
+    for x in cities:
+        if cities.count(x)==1:
+            begin=x
+            
+    def iter1(input_cities):
+        nonlocal tickets
+        nonlocal begin
+        for k in range(len(input_cities)):
+            if input_cities[k][0]==begin:
+                tickets.append(input_cities[k])
+                begin=input_cities[k][1]
+
+    for _ in range(10):
+        iter1(input_cities)
+        
+    print(tickets)
 
 
+#27. Merge N sorted list
+def mergesorted(A,B,C,D):
+    return sorted(A+B+C+D)
+
+#28. Minimum Directional Path
+def intersctingline(tuple_list):
+    output = []
+    a=len(tuple_list)
+    for i in range(a-1):
+        for j in range(i+1,a):
+            x = (tuple_list[j][1]-tuple_list[i][1])/(tuple_list[i][0]-tuple_list[j][0])
+            y = tuple_list[i][0]*x+tuple_list[i][1]
+            if x>0 and x<1:
+                output.append((x,y))
+    return output
+########################
+def intersectinglines(arr1,r): 
+    output=[] 
+    for i in range(len(arr1)): 
+        for j in range(i+1,len(arr1)): 
+            x=(arr1[j][1]-arr1[i][1])/(arr1[i][0]-arr1[j][0]) 
+            y=arr1[j][1]*x+arr1[j][0] 
+            if x>=r[0] and x<=r[1]: 
+                output.extend([arr3[i],arr3[j]]) 
+                return output
+
+arr3 = [(2, 3), (-3, 5), (4, 6), (5, 7)] 
+r = [0, 1] 
+print(intersectinglines(arr3,r))
+
+#29. Median
+l = [5,7,2,6];
+l.sort(); 
+print(l); 
+median =(l[int(len(l)/2)] + l[int(len(l)/2)-1])/2 if (len(l)%2 == 0) else l[int(math.ceil(len(l)/2))];
+print(median)
+
+#30. Decreasing subsequent values
+def desc(n):
+    for i in range(len(n)-1,0,-1):
+        if n[i]>n[i-1]:
+            n.remove(n[i-1])
+    return n
+############################
+def desc(n):
+    res= []
+    for i in range(len(n)):
+        res.append(n[i])
+        for j in range(i+1,len(n)):
+            if n[j] > n[i]:
+                res.pop()
+                break
+    return res
 
 
-
-
-
-
-
-    
+#31. Optimal Host
+import math
+def optimal_host(friends):
+    optimal_dist = 10e9
+    for host in friends :
+        dist=0
+        for friend in friends:
+            dist += math.sqrt((host['location'][0] - friend['location'][0])**2 + (host['location'][1] - friend['location'][1])**2 + (host['location'][2] - friend['location'][2])**2)
+        if dist < optimal_dist:
+            name = host['name']
+            optimal_dist = dist
+    return name    
     
     
     
