@@ -223,23 +223,150 @@ def sample_from_normal(p, n=1000):
         total += bernoulli.rvs(p)
     return total
     
+#16. Combinational Dice Rolls
+def combinations(n, m):
+    return list(product(range(1,m+1), repeat=n))
     
+#17. Closest Key    
+def closest_key(dictionary, inp) :
+    smallest_dist=[]
+    for index in dictionary:
+        distance = dictionary[index].index(inp)
+        smallest_dist.append(distance)
+    key=smallest_dist.index(min(smallest_dist))               
+    return list(dictionary.keys())[key]     
     
+#18. Book Combinations --little bit difficult--
+N = 18
+books = [(17,8), (9,4), (18,5), (11,9), (1,2), (13,7), (7,5), (3,6), (10,8)]
+
+def backtrack(rem, first=0, curr=[]):
+    if rem==0 and len(curr)>1:
+        output.append(curr[:])
+    elif rem<0:
+        return
+    for i in range(first, len(books)):
+        curr.append(books[i])
+        backtrack(rem-books[i][0], i+1, curr)
+        curr.pop(-1)
+
+output = []
+backtrack(N)
+
+def totalweight(l):
+    w=0
+    for t in l:
+        w+=t[1]
+    return w
+
+sorted(output, key=lambda x: totalweight(x))
     
+#19. Target Indices
+def targetindices(nums,target):    
+    dic = {}
+    for idx, num in enumerate(nums):
+        num2 = target - num      
+        if num2 in dic:
+            return sorted([idx, dic[num2]])
+        else:
+            dic[num] = idx
+#############################
+def binary_search(numlist, target):
+    if not numlist:
+        return 
+    start, end = 0, len(numlist) - 1 
+    while start + 1 < end:
+        mid = (start + end) //2 
+
+        if numlist[mid] >= numlist[start]:
+            if numlist[start] <= target <= numlist[mid]:
+                end = mid
+            else:
+                start = mid
+
+        else: # numlist[mid] < numlist[start]
+            if numlist[mid] <= target <= numlist[end]:
+                start = mid
+            else:
+                end = mid
+
+    if numlist[start] == target:
+        return start
+    elif numlist[end] == target:
+        return end    
+#20. Move Zero back
+def move_zeros(arr1):
+    for i in arr1:
+          if i ==0:
+                arr1.remove(0)
+                arr1.append(0)
+    return(arr1)    
+##################################
+def move_zeros(arr1):
+    z1 = []
+    z0 = []
+
+    for i in arr1:
+        if i != 0:
+            z1.append(i)
+        else:
+            z0.append(0)
+
+    return z1 + z0
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+#21. How Many Friends
+--without 0 frequency--
+def countfriends(friends):
+    a=[]
+    b=[]
+    for i in range(len(friends)):
+        if len(friends[i])!=1:
+            a.append(friends[i][0])
+            a.append(friends[i][1])
+    for j in set(a):
+        b.append((j, a.count(j)))
+    return b    
+ --with 0 frequency--   
+def countfriends(friends):
+    a=[]
+    b=[]
+    for i in range(len(friends)):
+        if len(friends[i])!=1:
+            a.append(friends[i][0])
+            a.append(friends[i][1])
+    for j in set(a):
+        b.append((j, a.count(j)))
+    for t in range(len(friends)):
+        if len(friends[t])==1:
+            b.append((friends[t][0], 0))
+    b=sorted(b)   
+    return b    
+#######################################    
+def soln(friends): 
+    d = dict() 
+    seen_friends = set()
+    for i in range(len(friends)):
+
+        if len(friends[i])==2:
+            cur_pair = friends[i]
+            first_friend = cur_pair[0]
+            second_friend = cur_pair[1]
+
+            if (first_friend,second_friend) or (second_friend,first_friend) not in seen_friends:
+                if first_friend not in d:
+                    d[first_friend] = 1
+                else:
+                    d[first_friend]+=1
+                if second_friend not in d:
+                    d[second_friend] = 1
+                else:
+                    d[second_friend]+=1
+        elif len(friends[i])==1:
+            if friends[i][0] not in d:
+                d[friends[i][0]]=0
+    return d    
+
+22. Shortest Transformation
 
 
 
