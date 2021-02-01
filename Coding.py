@@ -366,14 +366,62 @@ def soln(friends):
                 d[friends[i][0]]=0
     return d    
 
-22. Shortest Transformation
+#22. Shortest Transformation
+def shorttrans(beginWord,endWord,wordList):
+    b=wordList.index(beginWord)
+    e=wordList.index(endWord)
+    result=e-b
+    return result
+
+#23. Same Characters
+def checkstrings(inlist): 
+    for strin in inlist: 
+        if len(set(strin))>1: 
+            print('string',strin,'does not have all the same characters.') 
+        else:
+            print('string',strin,'has all the same characters.')
+##############################
+def checkstrings(inlist): 
+    if any(len(set(strin))>1 for strin in inlist ): 
+        return False
+    else:
+        return True
+            
+checkstrings(string_list)
+
+#24. NxN Grid Traversal -- Combination
+import math
+def path(N):
+    return math.factorial(2*N) // math.factorial(N) // math.factorial(N)
+##################################### 
+-- Dynamic Programming --
+import numpy as np
+def uniquePaths(self, n) -> int:
+    dp = [[1 for _ in range(n+1)]for _ in range(n+1)]   
 
 
+    for i in range(1,n+1):
+        for j in range(1,n+1):
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    # A nice Visualization of the grid
+    print(np.matrix(np.transpose(dp)))
 
+    # The Final answer
+    return int(dp[n][n])
 
+#25. Linear Regression Parameters
+port numpy as np
+from sklearn.linear_model import LinearRegression
 
-
-
+def regression(A):
+    A_T=list(map(list, zip(*A)))
+    x = np.array(A_T[0]).reshape((-1, 1))
+    y = np.array(A_T[1])
+    model = LinearRegression().fit(x,y)
+    print('A_T = ',list(map(list, zip(*A))))
+    print('α = ', int(round(model.intercept_)))
+    print('β = ', int(round(model.coef_[0])))
+    print('ŷ = ', int(round(model.coef_[0])),'X + ',int(round(model.intercept_)))
 
 
 
