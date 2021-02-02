@@ -1,12 +1,4 @@
-### 1. A man and a dog stand at opposite ends of a football field that is 100 feet long. Both start running towards each other.Let's say that the man runs at X ft/s and the dog runs at twice the speed of the man. Each time the dog reaches the man, the dog runs back to the end of the field where it started and then back to the man and repeat.What is the total distance the dog covers once the man finally reaches the end of the field?
-
-A: 200 ft
-
- 2 * 200 * (1⁄3+1⁄9+1⁄27+1⁄81+……) =200
-
-The man traveled 100 feet, and the dog travels twice as fast, so the dog must have traveled 200 feet in the same time period (their start and end times are the same).
-
-### 2. Metrics use to track accuracy and validity of the Classification model
+### 1. Metrics use to track accuracy and validity of the Classification model
 
 a. ***Classification (confusion) metrics***
 
@@ -42,7 +34,7 @@ d. ***Other practical advice***
 
 Another common thing I'll do when evaluating classifier models is to reduce the dataset into two dimensions and then plot the observations and decision boundary. Sometimes it's helpful to visually inspect the data and your model when evaluating its performance.
 
-### 3. Metrics use to track accuracy and validity of the Regression model
+### 2. Metrics use to track accuracy and validity of the Regression model
 
 a. ***Explained variance*** compares the variance within the expected outcomes, and compares that to the variance in the error of our model. This metric essentially represents the amount of variation in the original dataset that our model is able to explain.
 
@@ -56,7 +48,7 @@ c. ***R2 coefficient*** represents the proportion of variance in the outcome tha
 
 R^2(ytrue,ypred)=1−∑(ytrue−ypred)^2/∑(ytrue−y¯)^2
 
-### 4. Diagnose bias and variance 
+### 3. Diagnose bias and variance 
 
 a. ***Validation curves***
 
@@ -72,7 +64,7 @@ If our model has high bias, we'll observe fairly quick convergence to a high err
 
 If our model has high variance, we'll see a gap between the training and validation error. This is because the model is performing well for the training data, since it has been overfit to that subset, and performs poorly for the validation data since it was not able to generalize the proper relationships. In this case, feeding more data during training can help improve the model's performance.
 
-### 5. What are MLE and MAP? What is the difference between the two?
+### 4. What are MLE and MAP? What is the difference between the two?
 
 Maximum Likelihood Estimation (MLE) and Maximum A Posteriori (MAP), are both a method for estimating some variable in the setting of probability distributions or graphical models. They are similar, as they compute a single estimate, instead of a full distribution.
 
