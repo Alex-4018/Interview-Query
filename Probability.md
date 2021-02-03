@@ -145,8 +145,9 @@ for _ in range(100):
     res[_] = y
 </pre>
 
-
-
+#### 15. Nightly Job
+##### Every night between 7pm and midnight, two computing jobs from two different sources are randomly started with each one lasting an hour. Unfortunately, when the jobs simultaneously run, they cause a failure in some of the other company’s nightly jobs, resulting in downtime for the company that costs $1000. The CEO, who only has enough time today to hear no more than one word, needs a single number representing the annual (365 days) cost of this problem. Write a function to simulate this problem and output an estimated cost. How would you solve this using probability?
+For the probability part, you can use geometric probability. We have a square of side length 5, x: 0 to 5 and y: 0 to 5. There are two regions of non-overlap, when y is more than 1 hour later than x and when x is more than one hour later than y. When y is more than 1 hour later than x, we have a triangle bounded by y=1+x, y=5, x=0. When x is more than 1 hour later than y, we have a triangle bounded by y=0, x=5 and y=x-1. Both of these triangles have area 0.5*4*4=8, so there is a 16⁄25 chance of non-overlap, and a 9⁄25 chance of overlap.
 
 
 
