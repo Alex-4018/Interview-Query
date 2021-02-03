@@ -69,3 +69,89 @@ b. If the impressions are non-repetitive:
             P(1)= B/A
 </pre>
 
+#### 9. Raining in Seattle
+##### You are about to get on a plane to Seattle. You want to know if you should bring an umbrella. You call 3 random friends of yours who live there and ask each independently if it's raining. Each of your friends has a 2/3 chance of telling you the truth and a 1/3 chance of messing with you by lying. All 3 friends tell you that "Yes" it is raining.
+<pre>
+You do need your prior to answer the original question. 
+Let A="they all say it's raining" and B="it rains" 
+then P(A|B)=8/27 and P(A|not B)=1/27 so (cancelling factors of 27)
+P(B|A)=8xP(B)/ (8xP(B)+1x(1−P(B)) = 8P(B)/(1+7P(B))
+</pre>
+
+#### 10. First to Six
+##### Amy and Brad take turns in rolling a fair six-sided die. Whoever rolls a "6" first wins the game. Amy starts by rolling first. What's the probability that Amy wins?
+<pre>
+P(amy) = 1⁄6 + 5⁄6*5⁄6*P(amy) => P(amy) = (1/6)/(11/36) = 6⁄11
+P(amy) = 1⁄6 + 5⁄6*5⁄6 * 1⁄6 + (5⁄6*5⁄6)^2 * 1⁄6 + ... 
+       = a1(1-q^n)/(1-q) = 1⁄6 * (1-(5⁄6*5⁄6)^n)/1-(5⁄6*5⁄6)  = 6⁄11
+</pre>
+
+#### 11. Fair Coin
+##### Say you flip a coin 10 times. It comes up tails 8 times and heads 2 twice. Is this a fair coin?
+<pre>
+Under null hypothesis that the coin is fair, probability (two-sided) of observing something more 
+extreme than or equal to 8 heads and 2 tails is 
+(45+10+1 (left tail) + 45+10+1 (right side))/1024 = 112/1024 > 0.05. 
+So null hypothesis can’t be rejected. Hence we can’t conclude that the coin is biased.
+</pre>
+
+#### 12. Coin Flip Probability
+##### Let's say you are playing a coin flip game. You start with 30. If you flip heads, you win 1, but if you get tails, you lose 1. You keep playing unitl you run out of your money (have 0) or until you win $100. What is the probability that you win $100?
+<pre>
+E(X) = sum(f(x)*x) = 0.5 * 1 + 0.5 * (-1) = 0.
+Staring with $30, E(after one flip) = 30 + 0 = 30.
+E(At the game end) is also equal to 30. In the end, we either lose and have 0 or win and have 100 Now, in the end, we will still have an expected value of $ 30 no matter what.
+E(X) = 30 = p(win 100) * 100 + (1-p(win 100))* 0
+=> 30 = p(win 100) * 100
+=> p(win 100) = 30⁄100 = 0.3
+</pre>
+
+#### 13. Six Face Die
+##### You start with a fair 6-sided die and roll it six times, recording the results of each roll. You then write these numbers on the six faces of another, unlabeled fair die. For example, if your six rolls were 3, 5, 3, 6, 1 and 2, then your second die wouldn't have a 4 on it; instead, it would have two 3s. Next, you roll this second die six times. You take those six numbers and write them on the faces of yet another fair die, and you continue this process of generating a new die from the previous one. Eventually, you'll have a die with the same number on all six faces. What is the average number of rolls it will take to reach this state?
+<pre>
+import matplotlib.pyplot as plt
+import numpy as np
+result = []
+for i in range(10000):
+  counter = 0
+  die = [1,2,3,4,5,6]
+  while len(set(die))>1:
+    die = np.random.choice(die,6)
+    if len(set(die))==1:
+        #print(counter)
+        result.append(counter+1)
+        break;
+    else:
+        counter = counter+1
+print(np.mean(result))
+plt.hist(result)
+plt.show()
+</pre>
+
+#### 14. Random Feed Function
+##### Let's say you have a function that outputs a random integer between a minimum value, N, and maximum value, M. Now let's say we take the output from the random integer function and place it into another random function as the max value with the same min value N. 1. What would the distribution of the samples look like? 2. What would be the expected value?
+<pre>
+1. Uniform Distribution with [N,(N+M)/2]
+2. (M + 3 * N)/4
+Python Code:
+N = 1
+M = 10
+original = np.zeros(100)
+res = np.zeros(100)
+for _ in range(100):
+    x = np.random.randint(low = N ,high = M)
+    original[_] = x
+    y = np.random.randint(low = N, high = x+1)
+    res[_] = y
+</pre>
+
+
+
+
+
+
+
+
+
+
+
