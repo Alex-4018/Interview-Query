@@ -209,11 +209,74 @@ def compute_dev(dictionary_list):
         deviation= math.sqrt(sum( (x-mean)**2 for x in v )/len(v))
         result[dictionary['key']]=deviation
     return result
-    
 
+#12. Stop Words Filter
+def stripped_paragraph(stopwords,paragraph):
+    par=paragraph.split()
+    print(par)
+    for i in par:
+        if i in stopwords:
+            par.remove(i)
+    return " ".join(par)    
+
+#13. Buy or Sell
+def  get_profit_dates(stock_prices, dts):
+    min_price=min(stock_prices)
+    min_index=stock_prices.index(min_price)
+    max_price=max(stock_prices)
+    max_index=stock_prices.index(max_price)
+    print((max_price-min_price,dts[min_index],dts[max_index]))    
+######################
+def get_max_profit(stock_prices, dts):
+    max_profit = 0
+    buy=None
+    sell=None
+    for i in range(len(stock_prices)-1):
+        for j in range(i+1, len(stock_prices)):
+            diff = stock_prices[j] -  stock_prices[i]
+            if max_profit < diff:
+                max_profit = diff
+                buy=i
+                sell=j
+    return max_profit, dts[buy], dts[sell]
     
-    
-    
-    
-    
-    
+#14. Recurring character
+def recurringvchar(input):
+    letter=[]
+    for i in input:
+        if i not in letter:
+            letter.append(i)
+        else:
+            if i in letter:
+                return i
+    return 'None'
+        
+#15. Biggest Tip   
+def biggesttip(user_ids,tips):
+    biggest_tips=0
+    for i in tips:
+        if i>biggest_tips:
+            biggest_tips=i
+            index=tips.index(i)
+    return biggest_tips, user_ids[index]
+
+#16. Generate Normal Distribution
+import numpy as np 
+import matplotlib.pyplot as plt
+
+def generate_and_plot_samples(N): 
+    mean = 0 
+    std = 1 
+    data = np.random.normal(mean, std, N) 
+    plt.hist(data) 
+    plt.show()
+
+
+
+
+
+
+
+
+
+
