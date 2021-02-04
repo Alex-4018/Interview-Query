@@ -110,10 +110,107 @@ def get_grouped_week(ts):
         grouped_list.append(date_vals)
     return grouped_list    
     
+#6. Last Page Number --Write a function to return the last page number in the string. If the string of integers is not in correct page order, return the last number in order.
+def lastpage(input):
+    i=int(input[0])
+    start=0
+    while  i >= int(input[0]):
+        a=len(str(i+1))
+        if start+a+1 > len(input):
+            return (i)
+        if start+a+1 <= len(input):
+            if i+1 != int(input[start+1:start+1+a]):
+                            return(i)
+        start +=a
+        i +=1    
+#############################
+def last_page_number(string):
+    pos=0
+    page=0
+    while pos < len(string):
+        page_str=str(page+1)
+        if string[pos:pos+len(page_str)]==page_str:
+            pos+=len(page_str)
+            page+=1
+        else:
+            break
+    return page
+
+#7. Friendship Timeline -- lists the pairs of friends with their corresponding timestamps of the friendship beginning and then the timestamp of the friendship ending.
+
+def friendships(added,friends_removed):
+    friendships=[]
+    dic={}
+    for i in added:
+        for j in friends_removed:
+            if sorted(i['user_ids'])==sorted(j['user_ids']):
+                dic['user_ids']=sorted(i['user_ids'])
+                dic['start_date']=i['created_at']
+                dic['end_date']=j['created_at']
+                friendships.append(dic)
+                dic={}
+                friends_removed.remove(j)
+                break
+    print(sorted(friendships, key=lambda x: x['user_ids']))
+
+
+#8. New Resumes    
+def new_resumes(existing_ids,names,urls):
+    dic=[]
+    output=[]
+    id=[i.split('/')[-1] for i in urls] 
+    for key in id: 
+        for value in names: 
+            dic.append((value,key))
+            names.remove(value) 
+            break  
+    for key in dic:
+        if int(key[1]) not in existing_ids:
+            output.append(key)
+    print(output)
+
+#9. Get Top N words    
+def topnwords(n,posting):
+    post=posting.lower().replace('\n','').split(' ')
+    table=[]
+    for i in set(post):
+        table.append((i,post.count(i)))
+    print (sorted(table, key=lambda x: (x[1], x[0]), reverse=True)[0:n])    
+
+#10. Find Bigrams
+def findbigrams(sentence):
+    bigrams=[]
+    sen=sentence.lower().replace('\n','').split(" ")
+    for i in range(len(sen)-1):
+        bigrams.append((sen[i],sen[i+1]))
+    print(bigrams)
+   
+#11. Compute Deviation
+def deviation(input):
+    result={}
+    for i in input:
+        sum=0
+        var=0
+        for j in i['values']:
+            sum+=j
+            mean=sum/len(i['values'])
+        for k in i['values']:
+            var+=(k-mean)**2
+        std=((var/len(i['values']))**0.5)
+        result[i['key']]=round(std,2)       
+    print (result)
+#################################
+import math 
+def compute_dev(dictionary_list):
+    result={}
+    for dictionary in dictionary_list:
+        v=dictionary['values']
+        mean=sum(v)/len(v)
+        deviation= math.sqrt(sum( (x-mean)**2 for x in v )/len(v))
+        result[dictionary['key']]=deviation
+    return result
     
-    
-    
-    
+
     
     
     
