@@ -63,9 +63,22 @@ select t.num_comments, t.freq, sum(t2.freq) as cum_freq from tmp2 t left join tm
 --select num_comments, freq, sum(freq) over (order by num_comments) as cum_freq from tmp2 --
 
 
+#5. Month Over Month
+With tb1 as
+(select month(t.created_at) as 'month', sum(t.quantity*p.price) as 'revenue' 
+ from transcations t left join products p on t.id=p.id 
+ where year(t.created_at)=2019 group by month(t.created_at))
+select month, cast((revenue-revnue_last)/revnue_last as decimal(5,2)) as 'month_over_month'
+from select (*, lag(revenue) over (order by month) as revenue_last from tb1) tb2
+run;
 
 
-
+#6. Post Success
+Select date(created_at) as day, 
+sum(Case when event_name = ‘post’ then 1 else 0)*100/Sum(case when event_name = ‘enter’ then 1 else 0) as success_rate 
+from Post_events 
+Where date(created_at) >= Date_SUB(now(), interval 1 week) 
+Group by 1
 
 
 
