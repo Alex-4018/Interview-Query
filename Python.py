@@ -271,12 +271,186 @@ def generate_and_plot_samples(N):
     plt.hist(data) 
     plt.show()
 
+#16. Normalize Grades
+def normalize_grades(tuples):
+    low_value=min(x[1] for x in tuples)
+    high_value=max(x[1] for x in tuples)
+    return [(x[0], round(((x[1]-low_value)/(high_value-low_value)),2)) for x in tuples]
+        
+#17. RMS Error
+def calculate_rmse(list1,list2):
+    error_sum=0
+    for i in range(len(list1)):
+        error=(list1[i]-list2[i])**2
+        error_sum+=error
+    return (error_sum/len(list1))**0.5
 
+#18. Counting file lines
+def count_lines(filenm):
+    i=0
+    with open(filenm,‘r’) as fobj:
+    for i,l in enumerate(fobj): 
+        pass
+    return(i+1)
 
+#19. Weighted Keys
+def random_key(weights):
+    result=[]
+    total=sum(weights.values())
+    for key, value in weights.items():
+           print((key,"{:.1%}".format(value/total)))
+ 
+#20. Replace words with stems
+def replaceword(roots, sentence):
+    sen=sentence.lower().split(" ")
+    for i in range(len(sen)):
+        for j in roots:
+            length=len(j)
+            if sen[i][0:length]==j:
+                sen[i]=j
+    result=' '.join(sen)
+    print('"',result,'"')
+    
+    
+#21. String Subsequence
+def isSubSequence(string1,string2):
+    str1=string1
+    str2=string2
+    for i in str2:
+        if i not in str1:
+            str2=str2.replace(i,'')
+    if str2==str1:
+        return True
+    else:
+        return False
 
+#22. Flatten JSON
+def solution(json):
+    output = {}
+    for kys in input:
+        for ky in input[kys]:
+            output[str(kys+'_'+ky)] = input[kys][ky]
+    return output
 
+#23. Fizzbuzz
+def fizzbuzz(n):
+    result=[]
+    for i in range(1,n+1):
+        if i%3 == 0 and i%5 == 0:
+            result.append('Fizzbuzz')
+        elif i%3==0:
+            result.append('Fizz')
+        elif i%5==0:
+            result.append('Buzz')
+        else:
+            result.append(i)
+    print(result)
+    
+#24. Gaussian Generation
+from scipy import stats
+def generate_distribution(N,M):
+    return stats.norm.rvs(loc = M, scale = 1, size = N).astype(int).tolist()
+    
+generate_distribution(N = 9 , M =3)
 
+#25. N-gram Dictionary
+def solution(string,n):
+    output={}
+    for i in range(len(string)-n+1):
+        temp=string[i:i+n]
+        if temp in output:
+            output[temp]+=1
+        else:
+            output[temp]=1
+    return output     
 
+#26. Bucket Test Scores
+import pandas as pd
+import numpy as np
+n = 2000
+df = pd.DataFrame(zip(list(range(n)), np.random.randint(9,12+1,n), np.random.randint(0,100+1,n)), columns=['user_id', 'grade', 'test_score']).set_index('user_id')
+#print(df)
+bins = [0, 50, 75, 90, 100]
+group_size = df.groupby(['grade', pd.cut(df['test_score'], bins, labels=['<50', '<75', '<90', '<100'], right=False)]).size()
+print(group_size)
+percentage = (group_size.groupby('grade').cumsum() / df.groupby('grade').size() * 100).rename('percentage').round(0).astype(str) + '%'
+print(percentage.reset_index().to_markdown())
 
+#27. Moving Window
+def moving_window(input1,val):
+    result=[]
+    for i in range(len(input1)):
+        if i< val-1:
+            result.append(sum(input1[0:i+1])/(i+1))
+        else:
+            result.append((sum(input1[i-val+1:i+1]))/val)
+    return result
 
+#28. Minimum Change
+def find_change(cents):
+    count=0
+    cents_set=[1,10,25]
+    cents_set.reverse()
+    for i in cents_set:
+        count+=(cents//i)
+        cents-=(cents//i)*i
+    return count
+    
+#29. Truncated Distribution
+import scipy.stats as st
+def truncateddist(n, percentilethreshold): 
+    counter = 1 
+    result = [ ] 
+    while counter <=n:
+        randomsample = round(st.norm(2,1).rvs(1)[0],1) 
+        if randomsample <=st.norm(2,1).ppf(percentilethreshold): 
+            result.append(randomsample) 
+            counter+=1 
+    return result
 
+#30. Prime to N
+def primeton(n):
+    result=[]
+    for i in range(2,n):
+        if all(i %j!=0 for j in range(2,i)):
+            result.append(i)
+    return result
+
+#31. Business Days
+import pandas as pd
+date1 = '2021-01-31'
+date2 = '2021-02-18'
+
+#print(pd.bdate_range(date1, date2))
+print(pd.bdate_range(date1, date2).shape[0])
+########################
+from datetime import date,timedelta
+def businessday(date1,date2):
+    fromdate = date(2010,1,1)
+    todate = date(2010,3,31)
+    daygenerator = (fromdate + timedelta(x + 1) for x in range((todate - fromdate).days))
+    return sum(1 for day in daygenerator if day.weekday() < 5)
+
+#32. Variance
+def variance(test_list):
+    avg=sum(test_list)/len(test_list)
+    variance=0
+    for i in test_list:
+        variance+= (i-avg)**2
+    return variance/len(test_list)
+
+#33. TF-IDF
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+p1 = 'I saw a cat'
+p2 = 'I saw a dog'
+p3 = 'I saw a horse'
+p4 = 'I have a dog'
+
+vectorizer = TfidfVectorizer()
+vectors = vectorizer.fit_transform([p1,p2,p3,p4])
+feature_names = vectorizer.get_feature_names()
+dense = vectors.todense()
+denselist = dense.tolist()
+df = pd.DataFrame(denselist, columns=feature_names)
+df.head()
