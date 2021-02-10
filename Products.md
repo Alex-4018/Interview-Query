@@ -69,7 +69,7 @@ Since random assignment is not possible, you’ll need to control for selection 
 Ultimately, compare the pre to post change in metrics for the 2 groups at time t1 (relative to time t0) and see if the differences are significant.
 
 
-### 3. How would you test whether having more friends now increases the probability that a Facebook member is still an active user after 6 months?
+### 4. How would you test whether having more friends now increases the probability that a Facebook member is still an active user after 6 months?
 We can build a supervised machine learning model such as a binary classifier to model if a facebook member is still active after 6 months.
 
 Target: * pos class - member is active after 6 months * neg class - member is not active after 6 months
