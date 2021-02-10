@@ -170,4 +170,9 @@ DAU for Marketplace
 Number of Restaurants joining Market place week over week
 Number of Check-ins by Users
 
- 
+### 6. The online price is dependent on the availability of the product, the demand, and the logistics cost of providing it to the end consumer. You discover our algorithm is vastly under-pricing a certain consumer product. What are the steps you take in diagnosing the problem?
+
+Traditional price optimization requires knowing or estimating the dependency between the price and demand. This basic model can be further extended to incorporate item costs, cross-item demand cannibalization, competitor prices, promotions, inventory constraints and many other factors. The traditional price management process assumes that the demand function is estimated from the historical sales data, that is, by doing some sort of regression analysis for observed pairs of prices and corresponding demands. Since the price-demand relationship changes over time, the traditional process typically re-estimates the demand function on a regular basis.
+- If the product life cycle is relatively long and the demand function changes relatively slowly, the passive learning approach combined with organic price changes can be efficient, as the price it sets will be close to the true optimal price most of the time.
+- If the product life cycle is relatively short or the demand function changes rapidly, the difference between the price produced by the algorithm and the true optimal price can become significant, and so will the lost revenue. In practice, this difference is substantial for many online retailers, and critical for retailers and sellers that extensively rely on short-time offers or flash sales (Groupon, Rue La La, etc.).
+
