@@ -99,7 +99,7 @@ That sounds great, since Facebook's mission is to connect people and bring the w
 
 I will structure my answer using a simple framework:
 
-- I will first brainstorm objectives and goals, then talk about the user segments, discuss pain points and problems we should be solving for these users, if we come up with too many pain points and problems I would like to prioritize them and focus on the top two or three, I will then like to propose some solution, dram a simple wireframe and finally suggest some metrics that will allow us to measure if the Product is achieving the goals that we have established
+I will first brainstorm objectives and goals, then talk about the user segments, discuss pain points and problems we should be solving for these users, if we come up with too many pain points and problems I would like to prioritize them and focus on the top two or three, I will then like to propose some solution, dram a simple wireframe and finally suggest some metrics that will allow us to measure if the Product is achieving the goals that we have established
 
 Objectives & Goals
 
@@ -111,7 +111,7 @@ User Segments
 
 There are two main Users Personas that the product will cater to:
 
-- Restaurants & Customers
+Restaurants & Customers
 
 Now within the Restaurant segment you could have high end/Michelin rated/formal restaurants that are less frequented by the general population, then you have your mid-market and casual restaurants that are most commonly used by people and finally there are small/ mom & pop/family owned restaurants that specialize in certain cuisines and fall in the mid to low price range.
 
@@ -123,38 +123,37 @@ Problems/Pain Points
 
 Problem/Pain Points for Restaurants:
 
-- Outreach, spreading awareness, gaining market share, building relationships to promote repeat customers, targeted marketing
+Outreach, spreading awareness, gaining market share, building relationships to promote repeat customers, targeted marketing
 
-- Specially in the COVID situation convey their preparedness to the customers by ensuring they are following all protocols, providing for contactless carryout service wherever possible
+Specially in the COVID situation convey their preparedness to the customers by ensuring they are following all protocols, providing for contactless carryout service wherever possible
 
-- With food pickup & delivery being rampant in the COVID situation, be able to enable online ordering and payments, provide faster delivery, not mixing up orders and basically streamline the entire delivery and pickup process
+With food pickup & delivery being rampant in the COVID situation, be able to enable online ordering and payments, provide faster delivery, not mixing up orders and basically streamline the entire delivery and pickup process
 
 Problem/Pain Points for Users:
 
-- Locating restaurants, getting recommendations on food, look for deals
+Locating restaurants, getting recommendations on food, look for deals
 
-- If dining-in then make reservations
+If dining-in then make reservations
 
-- In current environment be able to browse menu online, order online and schedule either delivery or pickup at a desired time.
+In current environment be able to browse menu online, order online and schedule either delivery or pickup at a desired time.
 
 At a broader level those are the pain points I would like to focus on, would you like me to consider any other specific problems?
 
-Interviewer: No, this is good
 
 Solution
 
 In terms of solution, I would like to suggest a new Market Place for Restaurants. 
 
 Restaurants will be able to create their own workspaces or FB pages. The Market place landing page will consider user's location to default the most popular, most reviewed restaurants in his or her neighborhood. The page will also have a search options where users can search based on one or more of the following attributes:
-- By Cuisine
-- By Price range
-- By what is currently open
-- By which the one's frequented by my Friends (since this built on top of the FB ecosystems, we should be locate the frequented or visited restaurants when user's friends check- in)'
-- By friend's recommendation
-- By ratings
-- By the one's currently running promotions
-- By Name
-- By Zip Code/City/Location
+By Cuisine
+By Price range
+By what is currently open
+By which the one's frequented by my Friends (since this built on top of the FB ecosystems, we should be locate the frequented or visited restaurants when user's friends check- in)'
+By friend's recommendation
+By ratings
+By the one's currently running promotions
+By Name
+By Zip Code/City/Location
 Users will be able to click on their preferred restaurant and navigate the Restaurant’s FB page where they will have the ability to reserve a table
 For restaurants with friends check-ins or reviews the system will prioritize these and display at the top of the restauran page
 Access Menu, order online and checkout, during checkout a prompt will allow user to publish a checking to his or her FB page to enable promotion. Restaurants can incentivize their users for publishing their check-ins
@@ -162,20 +161,13 @@ Users can also schedule their pickup or delivery for a specific time
 Restaurants can use the standard FB pages to build marketing content, deals, pictures and given the current situation also create videos with a live tour of their kitchen and masked/gloved employees
 Wireframe
 
-(Drawn & displayed) 
-
 Prioritization – I will prioritize the following for the first Beta Testing/prototype
+Market place for Restaurants
+Discovery for Restaurants based on location, and all other attributes mentioned above especially connection activity. Connection activity would be top on my list cause that will allow users to receive tailored recommendations/feedback
 
-       Market place for Restaurants
-
-       Discovery for Restaurants based on location, and all other attributes mentioned above especially connection activity. Connection activity would be top on my list cause that will allow users to receive tailored recommendations/feedback
-
-Key Metrics
-
-# DAU for Marketplace
-
-# Number of Restaurants joining Market place week over week
-
-# Number of Check-ins by Users
+Key Metrics:
+DAU for Marketplace
+Number of Restaurants joining Market place week over week
+Number of Check-ins by Users
 
  
