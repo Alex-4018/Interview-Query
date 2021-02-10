@@ -67,3 +67,13 @@ Look at 2 groups of teen users at two time periods. Time period t0, parents of t
 Since random assignment is not possible, you’ll need to control for selection bias through matching or regression. Variables to match on would depend on the outcome measure of interest (time spent, engagement on tagged posts, sharing, posting). Few selection controls could include age, affluence, education level of teens and parents, ethnic/cultural background, size and density of connections etc.
 
 Ultimately, compare the pre to post change in metrics for the 2 groups at time t1 (relative to time t0) and see if the differences are significant.
+
+
+### 3. How would you test whether having more friends now increases the probability that a Facebook member is still an active user after 6 months?
+We can build a supervised machine learning model such as a binary classifier to model if a facebook member is still active after 6 months.
+
+Target: * pos class - member is active after 6 months * neg class - member is not active after 6 months
+
+We need to pick a model that would output probability of the pos and neg class. Logistics Regression will output the log-odds coefficients.
+
+The interpretation is that if the log-odd for the number of friends is greater than 0, we can say having more friends will increase the probability of the member being active after 6 months.
