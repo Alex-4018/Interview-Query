@@ -191,3 +191,29 @@ Lifetime value 1. Is 90 days enough to project lifetime value? I am not so sure 
 
 This is a regression problem. It’s probably not linear as it depends on many factors. There are some clear and intuitive predictors which are the number of staff in the kitchen, number of clients in the restaurant or number of orders waiting. You need some way of characterising the efficiency of the staff in the kitchen. You can do that by measuring the ammount of dishes served per minute for each of the staffs in the kitchen and use that as a predictor for each one. Same for the clients. A client that just entered is very likely to order a dish in a few minutes while a client already eating and that has been in the restaurant for a long time won’t have any effect on the kitchen. You could characterise that by having how much time each of the clients has been in the restaurant. Another thing to consider is that there could be 0 to N clients in the restaurante and 0 to N workers in the kitchen so missing predictors will have to be filled with a logical value e.g. we have space for N clients in our restaurant. We will have N predictors for each of the N clients. What if we have only half of these N clients?. What will we do with the other half of the predictors? One more predictor to take into account is the type of dishes that are going to be pending to be cooked. The waiting time is not going to be the same if we have 5 mains waiting to be cooked compared to 5 cold appetisers
 
+### 11. Let's say we have 1 million app rider journey trips in the city of Seattle. We want to build a model to predict ETA after a rider makes a ride request. How would we know if we have enough data to create an accurate enough model?
+Question is definitely unanswerable without knowing the business metrics. What is “accurate enough” for the business? I would definitely mention train/test/validate datasets (maybe 70%/2.0%/10%), but I think there’s a way to guess whether a model will actually work before building it.
+
+Could try to fit distributions to the ETAs as functions of individual variables (holding others constant) and seeing what families you get. If distributions are normal-ish (i.e. from distributions that quickly converge), you’re likely safe. If distributions look more like power laws, you may need more data.
+
+We need to ask how much error in ETA is acceptable. If I am not provided with error that company uses I would use rmse. We need to do cross validation on our data. If the rmse is not deviating a lot across folds that means the model has generalised well and we have enough data.
+
+
+Say we set aside 30% for test and train with 70% , i.e 700 K data points and we observe a reasonable metric (say regression R2 is over 80%) on train and test data, then I think thats a reasonable premise to say that we have enough data?
+
+On the other hand if the metric is poor say 60% R2 score and the learning-rate ( performance vs training set size) does not show any signs of saturating, that may be a reason to seek more training data. We may have to reduce dimensionality as well before experimenting other stuff.
+
+### 13. Let's say you have to build scrabble for Spanish users.Assuming that you don't know any Spanish, how would you approach assigning each letter a point value?
+The bag of letter in scrabble might have more pieces of frequently used letter and less pieces of rarely used letter. We can just assign rarely values large points and frequent values low points. May be we can get probability/frequency of each letter then we can invert it and may be round it to an integer.
+Other approach is to watch many scrabble games and see which letter is used most of the times by users and make a distribution based on usage. Now you again have usage frequency of letters , frequently used words will have higher number and rarely used words will have lower. So just invert the usage frequencies of letters and round to nearest integer.
+
+Let’s assume we have access to:
+A large Spanish corpus
+A large English corpus
+Scrabble letter scores for English
+
+For each corpus, filter out the following:
+One-letter words
+Proper nouns (anything with a capital letter that doesn’t follow a period; alternatively, anything not in a dictionary, although we may not have access to a dictionary)
+Contractions
+After that, look at the frequency of letters. See how they compare with letter scores for English, then follow roughly the same pattern for Spanish.
