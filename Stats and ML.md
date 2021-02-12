@@ -90,11 +90,97 @@ You cannot use R-squared to determine whether the coefficient estimates and pred
 
 Overfitting, not correcting for model complexity, doesn’t tell which variable most important, doesn’t tell the error bar (uncertainty) on each variable.
 
+### 7. How would you tackle multicollinearity in multiple linear regression?
+
+I would suggest it is better to draw a correlation matrix, or heat map to illustrate the correlation between any two factors. Only when all non-diagonal elements are smaller than a given threshold should they be considered independent.
+
+If there are unsatisfied elements, available options include: PCA, which is supposed to reduce dimensionality, is also helpful in minimizing the correlationship;,Ridge/Lasso Regression, which punishes the biases from models; obtain more data, so as to reduce variance.
+
+You could use the Variance Inflation Factors (VIF) to determine if there is any multicollinearity between independent variables — a standard benchmark is that if the VIF is greater than 5 then multicollinearity exists.
+
+Multicollinearity undermines the statistical significance of an independent variable. While it may not necessarily have a large impact on the model’s accuracy, it affects the variance of the prediction and reduces the quality of the interpretation of the independent variables
+
+### 8. Between linear regression and random forest regression, which model would perform better and why?
+
+A linear regression is a linear model. Random forest is a tree-based model that grows trees in parallel. These are two completely different models so there are a lot of differences:
+Linear Regression has many assumptions 1) normal distribution of error terms 2) independence of the predictors 3) mean residuals = 0 and constant variance 4) no multi-collinearity or autocorrelation. Random Forest, on the other hand, does not have these assumption requirements.
+Linear Regression cannot handle cardinality and can be affected by extreme outliers. Random Forest handles missing values and cardinality very well and is not influenced by extreme outliers
+A linear regression will work better if the underlying distribution is linear and has many continuous predictors. Random Forest will tend to be better with categorical predictors.
+Both will give some semblance of a “feature importance.” However, linear regression feature importance is much more interpretable
+Usually random forest regressor being an ensemble technique should be better than linear regression. If the booking prices follow a linear trend, or if there are a large number of features, it may be more performance-friendly to use linear regression. In general, random forest will outperform linear regression. But as mentioned before, it’ll depend on the distribution of the dataset and the different available predictors. There is no cookie cutter, “ this model always performs better.”
+
+### 9. Let's say you have a categorical variable with thousands of distinct values, how would you encode it?
+I would go with Target Encoding. Encode the mean of the target variable as the value for that category.
+If we take a neural network approach then Entity Embeddings can also be used. In this we train an embedding matrix for the category, so like in text data we have embeddings for each word, out categories will each have an embedding for them. It will allow the neural network to learn a better representation of that category and the dimensionality would also be less.
+
+Basic Target Encoding - Encode the mean of the target value as the feature value. The benefit is that:
+Reduce the need to one hot encode, so we reduce the dimensionality of our feature set. This makes using this feature on simple regressions more palatable.
+KFold Target Encoding - a “regularized” version, to prevent overfitting onto our train set. This ensures that our feature will generalize better to unseen data.
+Label Encoding - We can just convert these distinct values to a specific label. However, I like target encoding better, because it’ll incorporate information about the magnitude of its effect on the target. With label encoding, we’re treating the distance between each label equally.
+1. One-hot encoding 
+    * pros - two levels numeric encoding , naive 
+    * cons - given the cardinality, dimensions increase, curse of dimensionlity 
+2. label encoding 
+    * pros - numeric vector given the categories 
+    * cons - does not add any predictive power, confusion around the interpretability 
+3. Count encoding 
+    * pros - indicative of the frequency, predictive power 
+    * cons - 
+4. Target encoding - proportion/avg of Y for this categorical level 
+    * pros - predictive power, better performance , learning from the labels 
+    * cons - chances of target leakage if not implemented properly 
+5. Cat Boost encoding - similar to target encoding but takes proportion will the current row in a sequential manner 
+6. WOE - binning = WOE(Ci) = log(+ve examples asscicated with that category /-ve examples associated with the category)
+    * gives the score of how representative the cat level w.r.t the postive label 
+    * pros - best performance 
+    * cons - target leakage if not implemented correctly
+    
+### 10. Bank Fraud Model
+Training Data (chargebacks due to fraud & historical fraud txns)
+If imbalanced data, then use the resampling technique to boost the fraud example
+Model perspective (Use a simple Logistic Regression / RandomForest based so that realtime inference is fast). We could also explore Ensemble of multiple models (if runtime perspective if that is fast enough)
+
+A simple classification model emitting probability score (a threshold could be chosen) to take the decision
+
+Features:
+POS / web/ phone
+Time (temporal features)
+Realtime features (location)
+txn_amount
+txn_currency
+Card in person
+Was the card stolen or on hold
+Is there a overdraft protection
+Is txn_amount > 500 USD
+num of times card used in the previous month
+num of average txn amount for the last 90 days
+is_international card / txn ?
+Does it involve multi-currency ?
+Is this from a different location than the correct Address ?
+Cost consideration (False Positive vs False Negative)
+
+Measure based on the cost consideration (As this could be highly class imbalanced data, we could consider F1-score along with accuracy and AUC)
 
 
+Fraudulent data are imbalanced data, which means TP+FN is very small compared to TN+FP.
+Precision = TP/(TP+FP)
+Recall = TP/(TP+FN)
+Accuracy= (TP+TN)/(TP+TN+FP+FN)
+For an imbalance dataset, we should use Precision or Recall instead of Accuracy.
 
+From business/practical perspective, what are the consequences for FP or FN?
+FP: customers receive false-alarm texts and get annoyed
+FN: fraud gets undetected; huge loss to the bank and customers
+Therefore, the model should focus on minimizing FN(type 2 error)
 
+### 11. What methods could you use to increase recall?
+Recall is how many of the true valid searches that the search algorithm gets right. It is TP/(TP+FN). You can increase recall by decreasing the FN or the False Negative. If you lower the threshold (in extreme case threshold is 0 and everything is classified as a valid search so FN will be 0) used by the search algorithm then number of false negatives will go down but False Positives (FP) will also go up. Looking at precision-recall curve can help identify this tradeoff between recall and precision.
+Using ROC curve technique for current search algorithm, by changing the model hyper parameters throughout their range will give idea about at what combination of model hyper parameters, the current algorithm yields best results in terms of TPR and FPR. Minimum FPR and maximum TPR is goal to get true positive results and reduce false positives.
 
-
-
-
+### 12. Assumption of Linear Regression
+Assumptions of linear regression:
+- Linear relationship between X and Y
+- Error terms are normally distributed,Error term has a mean of 0
+- Error terms are independent of each other
+- Error terms have constant variation
+- Low or no correlation between any two variables
