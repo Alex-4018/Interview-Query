@@ -83,9 +83,12 @@ A goal of regression analysis is to isolate the relationship between each indepe
 
 There is a very simple test to assess multicollinearity in your regression model. The variance inflation factor (VIF) identifies correlation between independent variables and the strength of that correlation. Statistical software calculates a VIF for each independent variable. VIFs start at 1 and have no upper limit. A value of 1 indicates that there is no correlation between this independent variable and any others. VIFs between 1 and 5 suggest that there is a moderate correlation, but it is not severe enough to warrant corrective measures. VIFs greater than 5 represent critical levels of multicollinearity where the coefficients are poorly estimated, and the p-values are questionable.
 
+### 6. You want to determine a relationship between two variables.What is the downside of only using the R-Squared (R2) value to do so?
 
+R-squared is a goodness-of-fit measure for linear regression models. This statistic indicates the percentage of the variance in the dependent variable that the independent variables explain collectively. R-squared measures the strength of the relationship between your model and the dependent variable on a convenient 0 – 100% scale.
+You cannot use R-squared to determine whether the coefficient estimates and predictions are biased, which is why you must assess the residual plots.
 
-
+Overfitting, not correcting for model complexity, doesn’t tell which variable most important, doesn’t tell the error bar (uncertainty) on each variable.
 
 
 
