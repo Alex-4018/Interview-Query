@@ -78,6 +78,10 @@ Based on the formula above, we can conclude that MLE is a special case of MAP, w
 
 [link][https://towardsdatascience.com/mle-vs-map-a989f423ae5c]
 
+### 5. How do you detect and handle correlation between variables in linear regression? What will happen if you ignore the correlation in the regression model?
+A goal of regression analysis is to isolate the relationship between each independent variable and the dependent variable.when independent variables are correlated, it indicates that changes in one variable are associated with shifts in another variable. The stronger the correlation, the more difficult it is to change one variable without changing another. It becomes difficult for the model to estimate the relationship between each independent variable and the dependent variable independently because the independent variables tend to change in unison. two problem can occur: 1.The coefficient estimates can swing wildly based on which other independent variables are in the model. The coefficients become very sensitive to small changes in the model. 2. Multi col-linearity reduces the precision of the estimate coefficients, which weakens the statistical power of your regression model. You might not be able to trust the p-values to identify independent variables that are statistically significant.
+
+There is a very simple test to assess multicollinearity in your regression model. The variance inflation factor (VIF) identifies correlation between independent variables and the strength of that correlation. Statistical software calculates a VIF for each independent variable. VIFs start at 1 and have no upper limit. A value of 1 indicates that there is no correlation between this independent variable and any others. VIFs between 1 and 5 suggest that there is a moderate correlation, but it is not severe enough to warrant corrective measures. VIFs greater than 5 represent critical levels of multicollinearity where the coefficients are poorly estimated, and the p-values are questionable.
 
 
 
