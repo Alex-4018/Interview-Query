@@ -184,3 +184,34 @@ Assumptions of linear regression:
 - Error terms are independent of each other
 - Error terms have constant variation
 - Low or no correlation between any two variables
+
+### 13. What are kernel methods in machine learning? What are the requirements for a matrix to represent a kernel? What happens if we run a support vector machine model using a kernel that does not satisfy these requirements?
+Kernel methods ( implicitly) map a linear classifier to a non-linear space. In layman’s terms, they let you look for hyperplanes in different places.
+Kernel matrix needs to be positive semi-definite. (This is a concept from linear algebra, covered later in the semester in an intro course.)
+
+positive semi-definite matrices provide a metric to your space, if the matrix is not positive semi-definite you can no longer guarantee that the distance between two points is positive. Besides the matrix should also be symmetric, therefore the distance from A to B should be the same as the distance from B to A.
+I don’t know, but my guess is you won’t necessarily get a good answer from your SVM. I think not having a positive semi-definite kernel is like having a set that’s no longer closed, where you can end up with results outside the set and thus don’t make sense.
+These are called kernel tricks. The objective is to tranform data from input space to a higher dimensional feature space. Transforming data into higher dimension space raises the possibility of data being linearly seperable via a hyperplane.
+
+Now if the kernels don’t follow the required characteristics, it would imply that all the operations performed in the feature space are not longer valid which will result in your model being crap, literally crap. So, if the kernel does not fulfill the required properties, best is not to do the transformtion and deal with the data in the input space.
+
+### 14. Lasso vs Ridge
+Ridge regression and Lasso Regression are similar methods that try to reduce overfitting of our regression. The difference is in the methods that were being implemented. In ridge regression, we add the squared of magnitude of coefficient, as a penalty into the cost function (also called L2 penalty). For Lasso, we add absolute value of coefficient as a penalty to the cost function (also called L1 penalty). Lasso is better if we want to train a sparse model: this is because L1 regularization forces parameters to be shrunk to 0 - thereby helps with feature selection.
+
+In either cases, it is helpful to normalize variables before running a regularized regression. This is because we want the regularization penalty to be applied evenly across all variables.
+
+Ridge regression adds “squared magnitude” of coefficient as penalty term to the loss function. Here the highlighted part represents L2 regularization element.
+Lasso Regression (Least Absolute Shrinkage and Selection Operator) adds “absolute value of magnitude” of coefficient as penalty term to the loss function.
+The key difference between these techniques is that Lasso shrinks the less important feature’s coefficient to zero thus, removing some feature altogether. So, this works well for feature selection in case we have a huge number of features.
+
+Penalty terms: L1 regularization uses the sum of the absolute values of the weights, while L2 regularization uses the sum of the weights squared. Feature selection: L1 performs feature selection by reducing the coefficients of some predictors to 0, while L2 does not. Computational efficiency: L2 has an analytical solution, while L1 does not. Multicollinearity: L2 addresses multicollinearity by constraining the coefficient norm.
+
+
+Penalty terms: L1 regularization uses the sum of the absolute values of the weights, while L2 regularization uses the sum of the weights squared. Feature selection: L1 performs feature selection by reducing the coefficients of some predictors to 0, while L2 does not. Computational efficiency: L2 has an analytical solution, while L1 does not. Multicollinearity: L2 addresses multicollinearity by constraining the coefficient norm.
+
+### 15. Xgboost vs Random Forest (bagging)
+In bagging, we have several base learners or decision trees which generated in parallel and form the base learners of bagging technique. However, in boosting, the trees are built sequentially such that each subsequent tree aims to reduce the errors of the previous tree. Each tree learns from its predecessors and updates the residual errors. Hence, the tree that grows next in the sequence will learn from an updated version of the residuals.
+
+In contrast to bagging techniques like Random Forest, in which trees are grown to their maximum extent, boosting makes use of trees with fewer splits.
+
+Boosting is based on weak learners (high bias, low variance). … Boosting reduces error mainly by reducing bias (and also to some extent variance, by aggregating the output from many models). On the other hand, Random Forest uses as you said fully grown decision trees (low bias, high variance).
