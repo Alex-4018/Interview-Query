@@ -217,3 +217,13 @@ One-letter words
 Proper nouns (anything with a capital letter that doesn’t follow a period; alternatively, anything not in a dictionary, although we may not have access to a dictionary)
 Contractions
 After that, look at the frequency of letters. See how they compare with letter scores for English, then follow roughly the same pattern for Spanish.
+
+### 14. You're tasked with building a model to figure out the most optimal way to send ten emails copies that the content team generated to increase conversions to a list of subscribers.
+
+Summary steps:
+
+Understand what each email that is being sent talks about, understand the content of it. If the email looks long, try to describe the email in 4-5 words.
+
+Assuming that the list of subscribers to target to is already given, group the similar kind of subscribers into one - an unsupervised clustering algorithm should work to group similar subscribers into one.
+
+Assuming, that we have the user activity of the list of subscribers from which we can get their interest, find the common interest words within each cohort created from above and match it with the email content using cosine similarity between the two - I.e interests of a cohort and the content of the email. The cohort with the highest cosine similarity to the email should be sent that particular email.
