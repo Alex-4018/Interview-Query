@@ -215,3 +215,53 @@ In bagging, we have several base learners or decision trees which generated in p
 In contrast to bagging techniques like Random Forest, in which trees are grown to their maximum extent, boosting makes use of trees with fewer splits.
 
 Boosting is based on weak learners (high bias, low variance). … Boosting reduces error mainly by reducing bias (and also to some extent variance, by aggregating the output from many models). On the other hand, Random Forest uses as you said fully grown decision trees (low bias, high variance).
+
+### 16. Regularization and cross-validation are two common techniques used to improve the performance of machine learning algorithms. When should you use one versus the other?
+
+It is a false dichotomy to create a choice between regularization OR cross-validation, since they have distinct purposes that don’t necessarily overlap.
+
+For example, if we have some dataset where the number of features, p, is much greater than the number of samples, n, and we want to fit a multivariate regression model, we will overfit due to the fact that the number of features is greater than the number of samples, so we want to reduce the total number of features. Naively, we could just compare all the possible models by using all possible combinations of features and perform cross-validation, but this would take forever and isn’t even a remotely practical way for most simple cases.
+
+Regularization steps in to perform this in a single step, particularly Lasso regression, where the “unnecessary” features have a regression coefficient of 0, while all others are non-zero. Using regularization in this way, we only need to fit one model, instead of 2^p which we would need if we just tested every model against every other model, so it is a much faster procedure.
+
+On the other hand, cross-validation is used to address the question “how do I choose the best model out of this selection of models?”, where “best” is centered around how it performs on a test set. Generally if we even wanted to check if a regularized model is better than an unregularized model, we would use cross-validation, so many times the two techniques are used in conjunction with each other.
+
+### 17. How does random forest generate the forest? Additionally why would we use it over other algorithms such as logistic regression?
+<pre>
+LR: 1- much faster to train and execute
+    2- can handle millions of sparse features
+    3- less prone to overfitting(as are all linear models)
+    4- can work well when signal-to-noise is low
+
+RF: 1- more robust algorithm(can do regression)
+    2- outperform LR in medium-sized features.
+    3- No preprocessing
+</pre>
+
+DT builds classification or regression models in the form of a tree structure. It breaks down a data set into smaller and smaller subsets. Building DT is all about finding attribute that returns the highest information gain.
+
+RF is simply a collection of decision trees whose results are aggregated into one final result. One way Random Forests reduce variance is by training on different samples of the data. The other is by splitting on a random subset of attributes.
+
+RF vs LR: unbalance; n can’t use LR; speed; interpret; linearly separable
+
+Random forest generates the forest by essentially bootstrapping your dataset to create many different decision tree functions and then aggregating them together to create a superior model that has a lower variance than the individual decision trees have. Because the bootstrapped samples used to create the individual decision tree models are not truly independent, a random subset of the features from the dataset are used to split nodes for purity. This reduces the correlation between individual trees.
+
+The advantage that Random Forest has over models such as logistic regression is that it can capture non-linear relationships in the data and does not make assumptions about continuity in the feature values that models such as logistic regression make.
+
+### 18. What's the relationship between PCA and K-means clustering?
+Both K means and PCA are unsupervised machine learning techniques. While PCA is used for dimensionality reduction, K-Means can be used for clustering. K-Means fails in high dimensional scenarios ( It is computationally expensive in High Dimension scenarios and may incorrectly clustering things) Hence before Performing a K-Means one always performs a PCA to reduce dimensionality
+There is a certain number of k (centroids) that reduces the sum of squared distances we find that realistic optimal k from elbow method. Beyond that the sum of squared distance will still reduce upon increasing number of k but by small amounts if data really has good separation of clusters. Similarly in PCA there are only certain number of components that will capture max variance beyond that the captured variance increase with increase in no. Of components but by small amounts and I think there is no method to calculate these parameters before hand or via some method. We just have to run and see results and infer.
+
+### 19. Let’s say we’re comparing two machine learning algorithms. In which case would you use a bagging algorithm versus a boosting algorithm? 
+Bagging is also known as bootstrapping where the train data is resampled with replacement and an example would be RandomForest (which in addition to bagging also uses random set of features) This can run in parallel as there is no dependency between each estimator in RF
+
+Boosting is another ensemble technique used by GBT where this runs serially and each iteration improves by learning from the previous errors. The residual of the current iteration becomes the label for the next iteration. So tend to overfit and increase the variance. Other example would be Adaboost
+
+Tradeoff: Bagging is faster & can run in parallel but need not improve the accuracy with more estimators. Tend not to overfit with more estimators Boosting is slower & sequential but tends to improve in accuracy each iteration. This tend to overfit so we we need to counter that by using shallow trees or reduce the number of estimators or other hyperparameters
+Speed: Training & inference are faster in bagging Training is bit slow & inference will the similar to that of bagging
+
+### 20. How would you choose the k value when doing K-means clustering?
+We can choose the k-value by using elbow curve
+we can choose K value by following methods Choosing K: The Elbow method Choosing K: The Silhouette method Choosing K: The Gap statistic method
+
+### 21.
