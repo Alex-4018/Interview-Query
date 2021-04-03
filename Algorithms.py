@@ -153,7 +153,8 @@ def rotateString(A: str, B: str) -> bool:
         if(len(A) == len(B)): 
             buffer_string = A + A 
             return B in buffer_string 
-        else: return False    
+        else: 
+            return False    
     
 #10. String with same letters
 def sameletters(a, b):
@@ -224,6 +225,7 @@ def sample_from_normal(p, n=1000):
     return total
     
 #16. Combinational Dice Rolls
+from itertools import product
 def combinations(n, m):
     return list(product(range(1,m+1), repeat=n))
     
