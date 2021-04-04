@@ -394,7 +394,7 @@ checkstrings(string_list)
 #24. NxN Grid Traversal -- Combination
 import math
 def path(N):
-    return math.factorial(2*N) // math.factorial(N) // math.factorial(N)
+    return math.factorial(2*N) / math.factorial(N) / math.factorial(N)
 ##################################### 
 -- Dynamic Programming --
 import numpy as np
