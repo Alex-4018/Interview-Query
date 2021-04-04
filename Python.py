@@ -10,10 +10,26 @@ def sumton(integers,target):
                     for blist in dp[i-c]:
                         dp[i].append(blist+[c])
     return dp[target]
-    
+ ###############################
+ def backtrack(rem, curr, first):
+    if rem==0:
+        output.append(curr[:])
+    elif rem<0:
+        return 
+
+    for i in range(first, len(integers)):
+        curr.append(integers[i])
+        backtrack(rem-integers[i], curr, i)
+        curr.pop(-1)
+output=[]
+backtrack(target, [], 0)
+print(output)
     
 #2. Nightly Job
-Every night between 7pm and midnight, two computing jobs from two different sources are randomly started with each one lasting an hour. Unfortunately, when the jobs simultaneously run, they cause a failure in some of the other company’s nightly jobs, resulting in downtime for the company that costs $1000. The CEO, who only has enough time today to hear no more than one word, needs a single number representing the annual (365 days) cost of this problem. Write a function to simulate this problem and output an estimated cost. How would you solve this using probability?
+Every night between 7pm and midnight, two computing jobs from two different sources are randomly started with each one lasting an hour. 
+Unfortunately, when the jobs simultaneously run, they cause a failure in some of the other company’s nightly jobs, resulting in downtime for the company that costs $1000. 
+The CEO, who only has enough time today to hear no more than one word, needs a single number representing the annual (365 days) cost of this problem. 
+Write a function to simulate this problem and output an estimated cost. How would you solve this using probability?
 
 import numpy as np
 process_1 = np.random.randint(0, 5*60*60, size=10**7)
@@ -51,6 +67,7 @@ for i in range(1000):
     simulation.append(cost(365))
     
 np.array(simulation).mean()    
+#np.mean(simulation) 
     
 #3. Multimodal Sample   
 import random
@@ -87,6 +104,23 @@ def group_by_weeks(ts):
     for date in ts:
         grouped[weeks_from_date(starting_date, date)].append(date)
     return list(grouped.values())    
+
+
+ts = [
+    '2019-01-01', 
+    '2019-01-02',
+    '2019-01-08', 
+    '2019-02-01', 
+    '2019-02-02',
+    '2019-02-05',
+]
+
+output = [
+    ['2019-01-01', '2019-01-02'], 
+    ['2019-01-08'], 
+    ['2019-02-01', '2019-02-02'],
+    ['2019-02-05'],
+]
 ###################################    
 import pandas as pd
 dataframe = pd.DataFrame({'time_stamp':ts}) 
@@ -100,13 +134,13 @@ output = dataframe.groupby('Week_Number')['time_stamp'].apply(list).tolist()
 import pandas as pd
 def get_grouped_week(ts):
     dates = pd.DataFrame(ts)
-    dates[0] = pd.to_datetime(dates[0])
+    dates[0] = pd.to_datetime(dates[0]) # 0 is the name of the column
     dates['week'] = dates[0].apply(lambda x: x.week)
     
     grouped_list = []
     for val in set(dates['week'].values):
         week_val = dates[dates['week'] == val]
-        date_vals = list(week_val[0].values)
+        date_vals = list(week_val[0].values) # date_vals = list(week_val[0])
         grouped_list.append(date_vals)
     return grouped_list    
     
@@ -136,6 +170,16 @@ def last_page_number(string):
             break
     return page
 
+input = '12345'
+output = 5
+
+input = '12345678910111213'
+output = 13
+
+input = '1235678'
+output = 3
+
+
 #7. Friendship Timeline -- lists the pairs of friends with their corresponding timestamps of the friendship beginning and then the timestamp of the friendship ending.
 
 def friendships(added,friends_removed):
@@ -153,6 +197,32 @@ def friendships(added,friends_removed):
                 break
     print(sorted(friendships, key=lambda x: x['user_ids']))
 
+friends_added = [{'user_ids': [1, 2], 'created_at': '2020-01-01'},
+                 {'user_ids': [3, 2], 'created_at': '2020-01-02'},
+                 {'user_ids': [2, 1], 'created_at': '2020-02-02'},
+                 {'user_ids': [4, 1], 'created_at': '2020-02-02'}]
+
+friends_removed = [{'user_ids': [2, 1], 'created_at': '2020-01-03'},
+                   {'user_ids': [2, 3], 'created_at': '2020-01-05'},
+                   {'user_ids': [1, 2], 'created_at': '2020-02-05'}]
+
+
+friendships = [{
+    'user_ids': [1, 2],
+    'start_date': '2020-01-01',
+    'end_date': '2020-01-03'
+  },
+  {
+    'user_ids': [1, 2],
+    'start_date': '2020-02-02',
+    'end_date': '2020-02-05'
+  },
+  {
+    'user_ids': [2, 3],
+    'start_date': '2020-01-02',
+    'end_date': '2020-01-05'
+  },
+]
 
 #8. New Resumes    
 def new_resumes(existing_ids,names,urls):
@@ -169,6 +239,16 @@ def new_resumes(existing_ids,names,urls):
             output.append(key)
     print(output)
 
+existing_ids = [15234, 20485, 34536, 95342, 94857]
+names = ['Calvin', 'Jason', 'Cindy', 'Kevin']
+urls = [
+    'domain.com/resume/15234', 
+    'domain.com/resume/23645', 
+    'domain.com/resume/64337', 
+    'domain.com/resume/34536',
+]    
+    
+    
 #9. Get Top N words    
 def topnwords(n,posting):
     post=posting.lower().replace('\n','').split(' ')
@@ -193,7 +273,7 @@ def deviation(input):
         var=0
         for j in i['values']:
             sum+=j
-            mean=sum/len(i['values'])
+        mean=sum/len(i['values'])
         for k in i['values']:
             var+=(k-mean)**2
         std=((var/len(i['values']))**0.5)
@@ -209,6 +289,19 @@ def compute_dev(dictionary_list):
         deviation= math.sqrt(sum( (x-mean)**2 for x in v )/len(v))
         result[dictionary['key']]=deviation
     return result
+
+input = [
+    {
+        'key': 'list1',
+        'values': [4,5,2,3,4,5,2,3],
+    },
+    {
+        'key': 'list2',
+        'values': [1,1,34,12,40,3,9,7],
+    }
+]
+
+output -> {'list1': 1.12, 'list2': 14.19}
 
 #12. Stop Words Filter
 def stripped_paragraph(stopwords,paragraph):
@@ -288,10 +381,10 @@ def calculate_rmse(list1,list2):
 #18. Counting file lines
 def count_lines(filenm):
     i=0
-    with open(filenm,‘r’) as fobj:
-    for i,l in enumerate(fobj): 
-        pass
-    return(i+1)
+    with open("log.txt") as f:
+    count = 0
+    for l in f:
+        count  += i
 
 #19. Weighted Keys
 def random_key(weights):
@@ -325,12 +418,16 @@ def isSubSequence(string1,string2):
         return False
 
 #22. Flatten JSON
-def solution(json):
+def solution(input):
     output = {}
-    for kys in input:
-        for ky in input[kys]:
+    for kys in input.keys():
+        for ky in input[kys].keys():
             output[str(kys+'_'+ky)] = input[kys][ky]
     return output
+
+Input: { 'a':{'b':'c',
+              'd':'e'} }
+Output: {'a_b':'c', 'a_d':'e'}
 
 #23. Fizzbuzz
 def fizzbuzz(n):
@@ -363,6 +460,11 @@ def solution(string,n):
         else:
             output[temp]=1
     return output     
+
+string = 'banana' 
+n=3 
+output = {'ban':1, 'ana':2, 'nan':1} 
+
 
 #26. Bucket Test Scores
 import pandas as pd
